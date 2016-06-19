@@ -1,0 +1,20 @@
+{
+  "name": "@defvayne23/valid-input",
+  "version": "0.1.0",
+  "description": "Simple form validation that auto connects to all forms.",
+  "main": "ValidInput.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/defvayne23/ValidInput.git"
+  },
+  "keywords": [
+    "form",
+    "validation"
+  ],
+  "author": "John Hoover",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/defvayne23/ValidInput/issues"
+  },
+  "homepage": "https://github.com/defvayne23/ValidInput#readme"
+}
