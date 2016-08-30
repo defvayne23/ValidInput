@@ -27,6 +27,11 @@
         // If last submit click is this form.
         if(form_submitted === this) {
           submit_value = form_submit.value;
+
+          // Check for data attribute to skip validation.
+          if(form_submit.hasAttribute('data-validation-ignore')) {
+            return true;
+          }
         }
       }
 
