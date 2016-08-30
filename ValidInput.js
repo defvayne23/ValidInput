@@ -5,14 +5,16 @@
   var forms = document.querySelectorAll('form');
 
   Array.prototype.forEach.call(forms, function(form) {
-    var form_submit,
+    var form_submitted,
+        form_submit,
         form_submits = form.querySelectorAll('.submit button');
 
     // Add click event that sets the form_submit of this form
-    Array.prototype.forEach.call(form_submits, function(submit) {
-      submit.addEventListener('click', function(e) {
-        form_submit = this;
-      });
+    form.addEventListener('click', function(e) {
+      if(e.target.nodeName === 'BUTTON' || (e.target.nodeName === 'INPUT' && (e.target.getAttribute('type') === 'submit' || e.target.getAttribute('type') === 'image'))) {
+        form_submitted = this;
+        form_submit = e.target;
+      }
     });
 
     form.addEventListener('submit', function(e) {
@@ -22,7 +24,10 @@
 
       // This is set from another event that may not fire first
       if(form_submit) {
-        submit_value = form_submit.value;
+        // If last submit click is this form.
+        if(form_submitted === this) {
+          submit_value = form_submit.value;
+        }
       }
 
       if(submit_value !== 'Back') {
@@ -167,6 +172,9 @@
             }
           }
         });
+
+        // Reset form submit
+        form_submited = form_submit = null;
 
         if(form_error === false) {
           // e.preventDefault();
