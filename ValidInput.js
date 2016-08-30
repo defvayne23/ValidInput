@@ -21,7 +21,7 @@
 
       form.addEventListener('submit', function(e) {
         var form_error = false,
-            required_fields = form.querySelectorAll('.required'),
+            required_fields = form.querySelectorAll('[data-required]'),
             submit_value = '';
 
         // This is set from another event that may not fire first
@@ -179,7 +179,7 @@
               }
             }
           });
-          
+
           // Reset form submit
           form_submitted = form_submit = null;
 
