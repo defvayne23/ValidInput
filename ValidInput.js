@@ -219,7 +219,7 @@
     }
 
     if(input.getAttribute('data-validinput-equalto')) {
-      var eqdom = form.querySelector('input[name='+input.getAttribute('data-validinput-equalto')+']');
+      var eqdom = form.querySelector('input[name="'+input.getAttribute('data-validinput-equalto')+'"]');
       if(eqdom) {
         if(input.value !== eqdom.value) {
           input_error = true;
