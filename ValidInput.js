@@ -184,11 +184,12 @@
           form_submitted = form_submit = null;
 
           if(form_error === false) {
-            // e.preventDefault();
-            // return false;
             return true;
           } else {
             e.preventDefault();
+
+            form.querySelector('input[type=submit]').insertAdjacentHTML('beforebegin', '<p class="form-error-message">Please see above form errors.</p>');
+
             return false;
           }
         }
