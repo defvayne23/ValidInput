@@ -91,6 +91,9 @@
 
                 if(field_requires) {
                   if(field.hasAttribute('data-requires-value')) {
+                    console.log('Required value');
+                    console.log(field_requires.value);
+                    console.log(field.getAttribute('data-requires-value'));
                     // If value is not what we expect, skip validation
                     if(field_requires.value !== field.getAttribute('data-requires-value')) {
                       skip = true;
@@ -101,17 +104,23 @@
                 }
               }
 
+              console.log(skip);
+
               if(skip === false) {
                 if(field.value === '') {
                   form_error = true;
                   if(field.getAttribute('data-required-label')) {
                     form.querySelector('.'+field.getAttribute('data-required-label')).classList.remove('hide');
+                  } else if(field.getAttribute('id') && form.querySelector('label[for="'+field.getAttribute('id')+'"]')) {
+                    form.querySelector('label[for="'+field.getAttribute('id')+'"]').classList.add('required-error');
                   } else {
                     field.parentNode.classList.add('required-error');
                   }
                 } else {
                   if(field.getAttribute('data-required-label')) {
                     form.querySelector('.'+field.getAttribute('data-required-label')).classList.add('hide');
+                  } else if(field.getAttribute('id') && form.querySelector('label[for="'+field.getAttribute('id')+'"]')) {
+                    form.querySelector('label[for="'+field.getAttribute('id')+'"]').classList.remove('required-error');
                   } else {
                     field.parentNode.classList.remove('required-error');
                   }
@@ -122,17 +131,29 @@
                     form_error = true;
                     if(this.getAttribute('data-required-label')) {
                       form.querySelector('.'+this.getAttribute('data-required-label')).classList.remove('hide');
+                    } else if(this.getAttribute('id') && form.querySelector('label[for="'+this.getAttribute('id')+'"]')) {
+                      form.querySelector('label[for="'+this.getAttribute('id')+'"]').classList.add('required-error');
                     } else {
                       this.parentNode.classList.add('required-error');
                     }
                   } else {
                     if(this.getAttribute('data-required-label')) {
                       form.querySelector('.'+this.getAttribute('data-required-label')).classList.add('hide');
+                    } else if(this.getAttribute('id') && form.querySelector('label[for="'+this.getAttribute('id')+'"]')) {
+                      form.querySelector('label[for="'+this.getAttribute('id')+'"]').classList.remove('required-error');
                     } else {
                       this.parentNode.classList.remove('required-error');
                     }
                   }
                 });
+              } else {
+                if(field.getAttribute('data-required-label')) {
+                  form.querySelector('.'+field.getAttribute('data-required-label')).classList.add('hide');
+                } else if(field.getAttribute('id') && form.querySelector('label[for="'+field.getAttribute('id')+'"]')) {
+                  form.querySelector('label[for="'+field.getAttribute('id')+'"]').classList.remove('required-error');
+                } else {
+                  field.parentNode.classList.remove('required-error');
+                }
               }
             } else if(field.classList.contains('required-sum')) {
               var ranges = field.querySelectorAll('input[type=range]'),
@@ -148,7 +169,7 @@
               } else {
                 form.querySelector('.'+field.getAttribute('data-required-label')).classList.add('hide');
               }
-            } else if(field.classList.contains('radios') || field.nodeName === 'UL' || field.classList.contains('required-radios')) {
+            } else if(field.classList.contains('radios') || field.classList.contains('checkboxes') || field.nodeName === 'UL' || field.classList.contains('required-radios')) {
               var skip = false;
 
               if(field.hasAttribute('data-required-visible')) {
@@ -188,7 +209,11 @@
           } else {
             e.preventDefault();
 
-            form.querySelector('input[type=submit]').insertAdjacentHTML('beforebegin', '<p class="form-error-message">Please see above form errors.</p>');
+            var error_message = form.querySelector('.form-error-message');
+
+            if(!error_message) {
+              form.querySelector('input[type=submit]').insertAdjacentHTML('beforebegin', '<p class="form-error-message">Please see above form errors.</p>');
+            }
 
             return false;
           }
