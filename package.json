@@ -1,6 +1,6 @@
 {
   "name": "@defvayne23/valid-input",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Simple form validation that auto connects to all forms.",
   "main": "ValidInput.js",
   "repository": {

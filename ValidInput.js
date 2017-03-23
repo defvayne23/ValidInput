@@ -1,4 +1,4 @@
-/*! ValidInput v0.4.0 - https://github.com/defvayne23/ValidInput */
+/*! ValidInput v0.4.1 - https://github.com/defvayne23/ValidInput */
 (function() {
   'use strict';
 
