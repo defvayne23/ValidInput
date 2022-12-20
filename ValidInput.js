@@ -1,4 +1,4 @@
-/*! ValidInput v0.4.1 - https://github.com/defvayne23/ValidInput */
+/*! ValidInput v0.4.2 - https://github.com/defvayne23/ValidInput */
 (function() {
   'use strict';
 
@@ -91,9 +91,6 @@
 
                 if(field_requires) {
                   if(field.hasAttribute('data-requires-value')) {
-                    console.log('Required value');
-                    console.log(field_requires.value);
-                    console.log(field.getAttribute('data-requires-value'));
                     // If value is not what we expect, skip validation
                     if(field_requires.value !== field.getAttribute('data-requires-value')) {
                       skip = true;
@@ -104,45 +101,65 @@
                 }
               }
 
-              console.log(skip);
-
               if(skip === false) {
                 if(field.value === '') {
                   form_error = true;
+
                   if(field.getAttribute('data-required-label')) {
                     form.querySelector('.'+field.getAttribute('data-required-label')).classList.remove('hide');
-                  } else if(field.getAttribute('id') && form.querySelector('label[for="'+field.getAttribute('id')+'"]')) {
-                    form.querySelector('label[for="'+field.getAttribute('id')+'"]').classList.add('required-error');
                   } else {
                     field.parentNode.classList.add('required-error');
+                  }
+
+                  if(field.hasAttribute('id')) {
+                    var field_label = form.querySelector('label[for='+input.getAttribute('id')+']');
+                    if(field_label) {
+                      field_label.classList.add('required-error');
+                    }
                   }
                 } else {
                   if(field.getAttribute('data-required-label')) {
                     form.querySelector('.'+field.getAttribute('data-required-label')).classList.add('hide');
-                  } else if(field.getAttribute('id') && form.querySelector('label[for="'+field.getAttribute('id')+'"]')) {
-                    form.querySelector('label[for="'+field.getAttribute('id')+'"]').classList.remove('required-error');
                   } else {
                     field.parentNode.classList.remove('required-error');
+                  }
+
+                  if(field.hasAttribute('id')) {
+                    var field_label = form.querySelector('label[for='+field.getAttribute('id')+']');
+                    if(field_label) {
+                      field_label.classList.remove('required-error');
+                    }
                   }
                 }
 
                 field.addEventListener('change', function(e) {
                   if(this.value === '') {
                     form_error = true;
+
                     if(this.getAttribute('data-required-label')) {
                       form.querySelector('.'+this.getAttribute('data-required-label')).classList.remove('hide');
-                    } else if(this.getAttribute('id') && form.querySelector('label[for="'+this.getAttribute('id')+'"]')) {
-                      form.querySelector('label[for="'+this.getAttribute('id')+'"]').classList.add('required-error');
                     } else {
                       this.parentNode.classList.add('required-error');
+                    }
+
+                    if(this.hasAttribute('id')) {
+                      var field_label = form.querySelector('label[for='+input.getAttribute('id')+']');
+                      if(field_label) {
+                        field_label.classList.add('required-error');
+                      }
                     }
                   } else {
                     if(this.getAttribute('data-required-label')) {
                       form.querySelector('.'+this.getAttribute('data-required-label')).classList.add('hide');
-                    } else if(this.getAttribute('id') && form.querySelector('label[for="'+this.getAttribute('id')+'"]')) {
-                      form.querySelector('label[for="'+this.getAttribute('id')+'"]').classList.remove('required-error');
                     } else {
                       this.parentNode.classList.remove('required-error');
+                    }
+
+                    if(this.hasAttribute('id')) {
+                      var field_label = form.querySelector('label[for='+this.getAttribute('id')+']');
+                      if(field_label) {
+                        field_label.classList.remove('required-error');
+                      }
                     }
                   }
                 });
