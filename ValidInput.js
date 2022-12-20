@@ -1,4 +1,4 @@
-/*! ValidInput v0.4.2 - https://github.com/defvayne23/ValidInput */
+/*! ValidInput v0.4.3 - https://github.com/defvayne23/ValidInput */
 (function() {
   'use strict';
 
@@ -112,7 +112,7 @@
                   }
 
                   if(field.hasAttribute('id')) {
-                    var field_label = form.querySelector('label[for='+input.getAttribute('id')+']');
+                    var field_label = form.querySelector('label[for='+field.getAttribute('id')+']');
                     if(field_label) {
                       field_label.classList.add('required-error');
                     }
@@ -143,7 +143,7 @@
                     }
 
                     if(this.hasAttribute('id')) {
-                      var field_label = form.querySelector('label[for='+input.getAttribute('id')+']');
+                      var field_label = form.querySelector('label[for='+this.getAttribute('id')+']');
                       if(field_label) {
                         field_label.classList.add('required-error');
                       }

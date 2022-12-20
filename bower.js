@@ -1,7 +1,7 @@
 {
   "name": "valid-input",
   "main": "ValidInput.js",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "homepage": "https://github.com/defvayne23/ValidInput",
   "authors": [
     "John Hoover"
